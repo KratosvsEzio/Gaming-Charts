@@ -1,0 +1,127 @@
+<!-- Filter games -->
+<section class="section-1">
+    <div class="jumbotron">
+        <form>
+            <div class="form-row row align-items-center">
+                <div class="col-auto  col-12 col-md-3 my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Genre</label>
+                    <select [(ngModel)]="genre" placeholder="Choose genre" name="genre" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option value="" selected>Choose...</option>
+                        <option *ngFor="let g of genres" [value]="g">{{g | uppercase}}</option>
+                    </select>
+                </div>
+                <div class="col-auto  col-12 col-md-3 my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Platform</label>
+                    <select [(ngModel)]="platform" placeholder="Choose platform" name="platform" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option value="" selected>Choose...</option>
+                        <option *ngFor="let p of platforms" [value]="p">{{p | uppercase}}</option>
+                    </select>
+                </div>
+                <div class="col-auto col-12 col-md-3 align-self-md-right my-1">
+                    <button type="submit" (click)="fetchGames()" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Table for top games by playtime -->
+<section class="mb-5">
+    <div class="card">
+
+        <!-- card header -->
+        <div class="card-header">
+            <b>
+                Top games by playtime
+            </b>
+        </div>
+
+        <!-- Table -->
+        <table class="table m-0">
+            <!-- Table Head -->
+            <thead class="table-dark">
+                <tr>
+                    <th width="30%" scope="col">Game</th>
+                    <th width="30%" scope="col">Platforms</th>
+                    <th width="20%" scope="col">Genre</th>
+                    <th scope="col">Total play time</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <ng-container *ngIf="gamesGroupByPlaytime$ | async as gamesByPlayTime; else play_time_no_games">
+                    <ng-container *ngIf="gamesByPlayTime.length !== 0; else play_time_no_games">
+                        <tr *ngFor="let game of gamesByPlayTime">
+                            <th scope="col">{{game.game}}</th>
+                            <th scope="col">{{game.platforms}}</th>
+                            <th scope="col">{{game.genre}}</th>
+                            <th scope="col">{{game.totalPlayTime}}</th>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+                <!-- else  -->
+                <ng-template #play_time_no_games>
+                    <tr>
+                        <th colspan="4" scope="col">
+                            <h4 class="text-center">No games were found.</h4>
+                        </th>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<!-- Table for top games by number of players -->
+<section class="mb-5">
+    <div class="card">
+
+        <!-- card Header -->
+        <div class="card-header">
+            <b>
+                Top games by number of players
+            </b>
+        </div>
+
+        <!-- Table -->
+        <table class="table m-0">
+
+            <!-- Table Head -->
+            <thead class="table-dark">
+                <tr>
+                    <th width="30%" scope="col">Game</th>
+                    <th width="30%" scope="col">Platforms</th>
+                    <th width="20%" scope="col">Genre</th>
+                    <th scope="col">Number of players</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <ng-container *ngIf="gamesGroupByPlayer$ | async as gamesByPlayers; else player_no_games">
+                    <ng-container *ngIf="gamesByPlayers.length !== 0; else player_no_games">
+                        <tr *ngFor="let game of gamesByPlayers">
+                            <th scope="col">{{game.game}}</th>
+                            <th scope="col">{{game.platforms}}</th>
+                            <th scope="col">{{game.genre}}</th>
+                            <th scope="col">{{game.totalPlayers}}</th>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Else -->
+                <ng-template #player_no_games>
+                    <tr>
+                        <th colspan="4" scope="col">
+                            <h4 class="text-center">No games were found.</h4>
+                        </th>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+</section>
