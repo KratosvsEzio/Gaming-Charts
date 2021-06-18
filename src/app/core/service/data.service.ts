@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class DataService {
 
-  private apiUrl = 'http://localhost:9000/.netlify/functions/app/'; // Netlify api url
+  private apiUrl = 'https://aashir-azeem-game-chart-be.netlify.app/.netlify/functions/app/'; // Netlify api url
   // private apiUrl = 'http://localhost:8000/'; // Localhost api url
 
   constructor(private http: HttpClient) { }
