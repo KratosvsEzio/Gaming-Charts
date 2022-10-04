@@ -1,4 +1,4 @@
-export interface Games {
+export interface IGames {
     game: string
     genre: string
     platforms: string[]

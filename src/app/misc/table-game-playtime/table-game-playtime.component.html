@@ -1,0 +1,48 @@
+<!-- Table for top games by playtime -->
+<section class="mb-5">
+    <div class="card">
+
+        <!-- card header -->
+        <div class="card-header">
+            <b>
+                Top games by playtime
+            </b>
+        </div>
+
+        <!-- Table -->
+        <table class="table m-0">
+            <!-- Table Head -->
+            <thead class="table-dark">
+                <tr>
+                    <th width="30%" scope="col">Game</th>
+                    <th width="30%" scope="col">Platforms</th>
+                    <th width="20%" scope="col">Genre</th>
+                    <th scope="col">Total play time</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <ng-container *ngIf="(_gamesGroupByPlaytime$ | async) as gamesByPlayTime; else play_time_no_games">
+                    <ng-container *ngIf="gamesByPlayTime.length !== 0; else play_time_no_games">
+                        <tr *ngFor="let game of gamesByPlayTime">
+                            <th scope="col">{{game.game}}</th>
+                            <th scope="col">{{game.platforms}}</th>
+                            <th scope="col">{{game.genre}}</th>
+                            <th scope="col">{{game.totalPlayTime}}</th>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+                <!-- else  -->
+                <ng-template #play_time_no_games>
+                    <tr>
+                        <th colspan="4" scope="col">
+                            <h4 class="text-center">No games were found.</h4>
+                        </th>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</section>

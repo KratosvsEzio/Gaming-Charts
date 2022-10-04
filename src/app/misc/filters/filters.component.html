@@ -1,0 +1,26 @@
+<!-- Filter games -->
+<section class="section-1">
+    <div class="jumbotron">
+        <form>
+            <div class="form-row row align-items-center">
+                <div class="col-auto  col-12 col-md-3 my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Genre</label>
+                    <select [(ngModel)]="selectedGenre" placeholder="Choose genre" name="genre" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option value="" selected>Choose genre...</option>
+                        <option *ngFor="let g of _genres | async" [value]="g">{{g | uppercase}}</option>
+                    </select>
+                </div>
+                <div class="col-auto  col-12 col-md-3 my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Platform</label>
+                    <select [(ngModel)]="selectedPlatform" placeholder="Choose platform" name="platform" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option value="" selected>Choose platform...</option>
+                        <option *ngFor="let p of _platforms | async" [value]="p">{{p | uppercase}}</option>
+                    </select>
+                </div>
+                <div class="col-auto col-12 col-md-3 align-self-md-right my-1">
+                    <button type="submit" (click)="fetchGames()" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,21 +1,24 @@
-import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { LayoutComponent } from './layout/layout.component';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { FooterComponent } from '@app/core/footer/footer.component';
+import { HeaderComponent } from '@app/core/header/header.component';
+import { LayoutComponent } from '@app/core/layout/layout.component';
 
 
 const routes: Routes = [
-  { path: '', component: LayoutComponent, children: [
-    {path: '', loadChildren: () => import('../home/home.module').then(m => m.HomeModule)},
-  ]}
+  {
+    path: '', component: LayoutComponent, children: [
+      { path: '', loadChildren: () => import('../features/home/home.module').then(m => m.HomeModule) },
+    ]
+  }
 ];
 
 @NgModule({
   declarations: [
-    HeaderComponent, 
-    FooterComponent, 
+    HeaderComponent,
+    FooterComponent,
     LayoutComponent
   ],
   imports: [

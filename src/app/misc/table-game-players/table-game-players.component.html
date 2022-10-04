@@ -1,0 +1,49 @@
+<section class="mb-5">
+    <div class="card">
+
+        <!-- card Header -->
+        <div class="card-header">
+            <b>
+                Top games by number of players
+            </b>
+        </div>
+
+        <!-- Table -->
+        <table class="table m-0">
+
+            <!-- Table Head -->
+            <thead class="table-dark">
+                <tr>
+                    <th width="30%" scope="col">Game</th>
+                    <th width="30%" scope="col">Platforms</th>
+                    <th width="20%" scope="col">Genre</th>
+                    <th scope="col">Number of players</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <ng-container *ngIf="(_gamesGroupByPlayer$ | async) as gamesByPlayers; else player_no_games">
+                    <ng-container *ngIf="gamesByPlayers.length !== 0; else player_no_games">
+                        <tr *ngFor="let game of gamesByPlayers">
+                            <th scope="col">{{game.game}}</th>
+                            <th scope="col">{{game.platforms}}</th>
+                            <th scope="col">{{game.genre}}</th>
+                            <th scope="col">{{game.totalPlayers}}</th>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Else -->
+                <ng-template #player_no_games>
+                    <tr>
+                        <th colspan="4" scope="col">
+                            <h4 class="text-center">No games were found.</h4>
+                        </th>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+
+</section>
